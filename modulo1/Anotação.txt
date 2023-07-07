@@ -1,0 +1,61 @@
+01 conseito de API Rest
+  1 - cliente | servidor
+  2 - Stateless
+  3 - Cache
+  4 - interface Uniforme 
+      cliente | servidor
+      json | html
+      mensagem de status
+  5 - Camada
+  6 - Código sobre demanda
+
+2 Metodos
+  get     leitura
+  post    cariação
+  put -   atualização
+  delete  deleção
+  patch   atualização parcial
+
+http code
+  1x informativo
+  2x confirmação
+    200 bem ok
+    201 post de inserção
+  3x Redirecionamento
+    301 movido
+    302 movido permanent
+  4x Erro do cliente
+    400 bad request
+    401
+    402
+    403
+    404
+    422
+  5x Erro no servidor
+
+
+HEADERS Params
+  authentication: app:localhost.com.br
+  method: GET
+  patch: /API/v1/
+  scheme: http
+  referer: http://localhost/node  
+
+
+QUERY Parameters
+  http://localhost/node/user?page=2&
+  chave
+  valor
+  separador
+
+
+ROUTER Parameter
+  http://localhost/node/user:{ID}
+
+
+BODY Parameter
+  {
+    name:"Fabio",
+    sobrenome:"Lukas"
+  }
+
