@@ -17,4 +17,35 @@ tsconfig.json
 estlintrc
 prettier
 
+
+
+----------------------------------------------------------------
+## execução do scripts
 yarn add ts-node-dev -D
+
+Configurando o debug e scripts
+"scripts": {
+    "dev": "ts-node-dev --inspect --transpile-only --ignore-watch node-modules --respawn ./src/server.ts"
+  },
+
+ts-node-dev: É o próprio comando para executar o servidor de desenvolvimento ts-node-dev.
+
+--inspect: Habilita o modo de depuração no servidor de desenvolvimento. Isso permite 
+que você depure o código TypeScript usando uma ferramenta de depuração, como o Chrome DevTools.
+
+--transpile-only: Esse argumento instrui o ts-node-dev a fazer apenas a transpilação 
+do código TypeScript para JavaScript, ignorando a checagem de tipos. Isso torna a 
+inicialização do servidor mais rápida, pois não é necessário verificar todos os tipos 
+durante a execução.
+
+--ignore-watch node-modules: Especifica que o diretório "node_modules" deve ser ignorado
+durante o monitoramento de alterações. Isso significa que o servidor de desenvolvimento
+não será reiniciado se ocorrerem alterações nos arquivos dentro do diretório "node_modules".
+Geralmente, não é necessário reiniciar o servidor quando as dependências instaladas são modificadas.
+
+--respawn: Esse argumento faz com que o servidor de desenvolvimento seja reiniciado 
+automaticamente quando ocorrerem alterações nos arquivos do projeto. Isso é útil para 
+garantir que as alterações no código sejam refletidas imediatamente durante o desenvolvimento.
+
+launch.json
+  "request": "attach",
