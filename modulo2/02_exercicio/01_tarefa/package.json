@@ -7,8 +7,10 @@
     "dev": "ts-node-dev --inspect --transpile-only --ignore-watch node-modules --respawn ./src/server.ts"
   },
   "dependencies": {
+    "@types/mysql": "^2.15.21",
     "@types/uuid": "^9.0.2",
     "express": "^4.18.2",
+    "mysql": "^2.18.1",
     "typescript": "^5.1.6",
     "uuid": "^9.0.0"
   },

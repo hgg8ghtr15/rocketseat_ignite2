@@ -13,12 +13,11 @@ class Tarefa {
     if (!this.id) {
       this.id = uuidv4()
     }
-    if (!this.dataCriacao) {
-      this.dataCriacao = new Date()
-    }
     if (!this.status) {
       this.status = true
     }
+    this.dataConclusao = null
+    this.dataCriacao = new Date()
   }
 }
 
