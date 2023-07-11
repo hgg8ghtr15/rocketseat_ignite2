@@ -17,8 +17,6 @@ tsconfig.json
 estlintrc
 prettier
 
-
-
 ----------------------------------------------------------------
 ## execução do scripts
 yarn add ts-node-dev -D
