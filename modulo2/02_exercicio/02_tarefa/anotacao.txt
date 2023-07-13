@@ -1,0 +1,38 @@
+yarn add -D typescript ts-node nodemon @types/express @types/node
+
+yarn add express pg typeorm dotenv reflect-metadata
+
+configura script no package.json
+  
+yarn tsc --init
+
+cria as pastas src
+
+configura a .env
+
+cria o data-source.ts
+
+cria o index.ts
+
+Cria as Entidade
+  Configuras o typeorm
+
+Configura o scrip de 
+  migration:generate
+  migration:run
+
+Executa o scrip 
+  yarn migration:generate
+  yarn migration:run
+
+Crio rodas
+  criar as rotas
+
+criar Controller
+  criar aqruivo controle
+
+Criar Respository
+  Criar Respository
+
+Ajustar rota
+
