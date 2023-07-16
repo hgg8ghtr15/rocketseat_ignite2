@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Usuario } from "./Usuario";
 
 @Entity('tarefas')
 export class Tarefa {
@@ -20,6 +21,9 @@ export class Tarefa {
 
   @Column({ type: 'boolean' })
   status: boolean;
+
+  @ManyToOne(() => Usuario, (usuario) => usuario.id)
+  usuario: Usuario
 
   constructor() {
     if (!this.dataTermini) {

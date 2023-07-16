@@ -1,20 +1,29 @@
 import { Request, Response } from 'express';
 import { tarefaRepository } from '../repositorys/tarefarepository'
+import { usuarioRepository } from '../repositorys/usuarioRepository';
 
 export default new class TarefaController {
   async create(req: Request, res: Response) {
-    const { nome, descricao, dataCriacao } = req.body
+    const { nome, descricao, dataCriacao, idUsuario } = req.body
     const dataCriacaoFormatada = new Date(dataCriacao)
+
     try {
-      const novaTarefa = tarefaRepository.create({
+
+      const usuario = await usuarioRepository.createQueryBuilder()
+        .where("id = :id", { id: Number(idUsuario) })
+        .getOne()
+
+      console.log(usuario)
+      const Tarefa = await tarefaRepository.create({
         nome,
         descricao,
-        dataCriacao: dataCriacaoFormatada
+        dataCriacao: dataCriacaoFormatada,
+        usuario: usuario || undefined
       })
-      console.log(novaTarefa)
-      await tarefaRepository.save(novaTarefa)
+      console.log(Tarefa)
+      await tarefaRepository.save(Tarefa)
 
-      return res.status(201).json({ novaTarefa, message: 'Cadastro efetuado com sucesso!' })
+      return res.status(201).json({ Tarefa, message: 'Cadastro efetuado com sucesso!' })
 
     } catch (error) {
       console.log(error)
@@ -63,7 +72,7 @@ export default new class TarefaController {
     const { nome, descricao } = req.body
     console.log(descricao, id, nome)
     try {
-      await tarefaRepository.createQueryBuilder("tarefa")
+      await tarefaRepository.createQueryBuilder()
         .update()
         .set({
           nome: nome,
@@ -84,7 +93,7 @@ export default new class TarefaController {
     const { id } = req.params
 
     try {
-      await tarefaRepository.createQueryBuilder("tarefa")
+      await tarefaRepository.createQueryBuilder()
         .delete()
         .where("id = :id", { id: Number(id) })
         .execute()
@@ -94,5 +103,5 @@ export default new class TarefaController {
       return res.status(500).json({ error: 'Erro interno do servidor!' })
     }
   }
-
+  
 }
