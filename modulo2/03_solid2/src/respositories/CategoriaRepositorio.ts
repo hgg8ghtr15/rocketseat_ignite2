@@ -3,7 +3,6 @@ import { ICategoriaRepositorio, ICriarCategoriaDTO } from './ICategoriaRepositor
 
 // usado para transacionar os dados entre as toras eo 
 
-
 class CategoriaRepositorio implements ICategoriaRepositorio {
 
   private categorias: Categoria[]
@@ -14,14 +13,16 @@ class CategoriaRepositorio implements ICategoriaRepositorio {
 
   criarCategoria({ nome, descricao }: ICriarCategoriaDTO): void {
     const categoria = new Categoria()
-
+    // const existeCategoria = this.categorias.find(categoria => categoria.nome === nome)
+    // if (existeCategoria) {
+    //   return 'Categoria já existe!'
+    // }
     Object.assign(categoria, {
       nome,
       descricao
     })
-
     this.categorias.push(categoria)
-
+    console.log("Cadastrado com sucesso!")
   }
 
   listarCategorias(): Categoria[] {

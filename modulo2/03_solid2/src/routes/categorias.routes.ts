@@ -1,26 +1,23 @@
-import { Router, request } from 'express'
+import { Router } from 'express'
 import { CategoriaRepositorio } from '../respositories/CategoriaRepositorio'
+
 import { CriarCategoriaService } from '../services/CriarCategoriaService'
 import { PostgresCategoriaRepositorio } from '../respositories/PostgresCategoriaRepositorio'
 
 const categoriasRoutes = Router()
-const categoriaRepositorio = new CategoriaRepositorio()
+const categoriaRepositorio = new PostgresCategoriaRepositorio
 
 categoriasRoutes.post("/", (request, response) => {
   const { nome, descricao } = request.body
-
-  const criarCategoriaSevide = new CriarCategoriaService(categoriaRepositorio)
-
-  const mensagem = criarCategoriaSevide.execute({ nome, descricao })
-
-  return response.status(200).send(mensagem)
+  const criarCategoriaService = new CriarCategoriaService(categoriaRepositorio)
+  criarCategoriaService.execute({ nome, descricao })
+  return response.status(200).send("Cadastrado")
 })
 
 categoriasRoutes.get("/", (request, response) => {
 
   const categorias = categoriaRepositorio.listarCategorias()
 
-  console.log(categorias)
   return response.status(200).json(categorias)
 })
 
