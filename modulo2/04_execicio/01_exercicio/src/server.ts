@@ -1,13 +1,13 @@
 import express from 'express'
 
-import { tarefaRouter } from './routes/tarefa.routes'
+import { routers } from './routes'
 
 const app = express()
 
 app.use(express.json())
 
 
-app.use(tarefaRouter)
+app.use(routers)
 
 const port = 5000
 

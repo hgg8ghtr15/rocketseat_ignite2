@@ -1,12 +1,22 @@
-import { Tarefa } from "../model/Tarefa";
-import { ITarefaDTO, ITarefaEditDTO, ITarefaRepositorio } from "./ITarefa";
+import { Tarefa } from "../../model/Tarefa";
+import { ITarefaDTO, ITarefaEditDTO, ITarefaRepositorio } from "../ITarefa";
 
 
 class TarefaRepositorio implements ITarefaRepositorio {
 
   private tarefas: Tarefa[]
-  constructor() {
+
+  private static INSTANCE: TarefaRepositorio
+
+  private constructor() {
     this.tarefas = []
+  }
+
+  public static getInstance(): TarefaRepositorio {
+    if (!TarefaRepositorio.INSTANCE) {
+      TarefaRepositorio.INSTANCE = new TarefaRepositorio
+    }
+    return TarefaRepositorio.INSTANCE
   }
 
   listarTarefas(): Tarefa[] {

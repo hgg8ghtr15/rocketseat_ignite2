@@ -1,5 +1,5 @@
 import { Tarefa } from "../../model/Tarefa"
-import { TarefaRepositorio } from "../../repository/TarefaRepositorio"
+import { TarefaRepositorio } from "../../repository/Imprmentacacao/TarefaRepositorio"
 
 
 class DeletarTarefaUseCase {

@@ -1,9 +1,9 @@
-import { TarefaRepositorio } from "../../repository/TarefaRepositorio";
+import { TarefaRepositorio } from "../../repository/Imprmentacacao/TarefaRepositorio";
 import { CriarTarefaController } from "./CriarTarefaController";
 import { CriarTarefaUseCase } from "./CriarTarefaUseCase";
 
 
-const tarefaRepositorio = new TarefaRepositorio()
+const tarefaRepositorio = TarefaRepositorio.getInstance()
 
 const criarTarefaUseCase = new CriarTarefaUseCase(tarefaRepositorio)
 const criarTarefaController = new CriarTarefaController(criarTarefaUseCase)
