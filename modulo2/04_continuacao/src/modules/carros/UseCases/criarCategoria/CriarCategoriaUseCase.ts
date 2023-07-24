@@ -1,4 +1,4 @@
-import { CategoriaRepositorio } from "../../respositories/CategoriaRepositorio";
+import { CategoriaRepositorio } from "../../respositories/implementacaoes/CategoriaRepositorio";
 import { ICategoriaRepositorio } from "../../respositories/ICategoriaRepositorio";
 
 interface IRequest {
@@ -19,9 +19,9 @@ class CriarCategoriaUseCase {
   execute({ nome, descricao }: IRequest): void {
     const categoria = this.categoriaRepositorio.findByNomeCategoria(nome)
 
-    if (categoria) {
-      throw new Error("Categoia Já cadastrada")
-    }
+    // if (categoria) {
+    //   throw new Error("Categoia Já cadastrada")
+    // }
     const mensagem = this.categoriaRepositorio.criarCategoria({ nome, descricao })
   }
 

@@ -1,5 +1,5 @@
-import { Categoria } from '../model/Categoria'
-import { ICategoriaRepositorio, ICriarCategoriaDTO } from './ICategoriaRepositorio'
+import { Categoria } from '../../model/Categoria'
+import { ICategoriaRepositorio, ICriarCategoriaDTO } from '../ICategoriaRepositorio'
 
 // usado para transacionar os dados entre as toras eo 
 
@@ -7,8 +7,17 @@ class CategoriaRepositorio implements ICategoriaRepositorio {
 
   private categorias: Categoria[]
 
-  constructor() {
+  private static INSTANCE: CategoriaRepositorio
+
+  private constructor() {
     this.categorias = []
+  }
+
+  public static getInstance(): CategoriaRepositorio {
+    if (!CategoriaRepositorio.INSTANCE) {
+      CategoriaRepositorio.INSTANCE = new CategoriaRepositorio()
+    }
+    return CategoriaRepositorio.INSTANCE
   }
 
   criarCategoria({ nome, descricao }: ICriarCategoriaDTO): void {
@@ -22,10 +31,12 @@ class CategoriaRepositorio implements ICategoriaRepositorio {
       descricao
     })
     this.categorias.push(categoria)
+    console.log(this.categorias)
     console.log("Cadastrado com sucesso!")
   }
 
   listarCategorias(): Categoria[] {
+    console.log(this.categorias)
     return this.categorias
   }
 

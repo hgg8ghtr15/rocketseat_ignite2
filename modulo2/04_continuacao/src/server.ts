@@ -1,13 +1,13 @@
 import express from 'express';
 
-import { categoriasRoutes } from './routes/categorias.routes';
 import { especificacaoRoutes } from './routes/especificacao.routes';
+import { routes } from './routes';
 
 const app = express();
 
 app.use(express.json());
 
-app.use("/categoria", categoriasRoutes)
+app.use(routes)
 app.use("/especificacao", especificacaoRoutes)
 
 const port = 5000;

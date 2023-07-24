@@ -1,20 +1,16 @@
 import { Router, request, response } from 'express'
-import { CategoriaRepositorio } from '../modules/carros/respositories/CategoriaRepositorio'
 import { criarCategoriaController } from '../modules/carros/UseCases/criarCategoria'
+import { listarCategoriaController } from '../modules/carros/UseCases/listarCategoria'
 
 
 const categoriasRoutes = Router()
-const categoriaRepositorio = new CategoriaRepositorio
 
 categoriasRoutes.post("/", (request, response) => {
-  return criarCategoriaController.remanajar(request, response)
+  return criarCategoriaController.handle(request, response)
 })
 
 categoriasRoutes.get("/", (request, response) => {
-
-  const categorias = categoriaRepositorio.listarCategorias()
-
-  return response.status(200).json(categorias)
+  return listarCategoriaController.handle(request, response)
 })
 
 export { categoriasRoutes }
