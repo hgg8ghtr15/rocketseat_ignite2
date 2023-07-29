@@ -1,16 +1,17 @@
 import express from 'express'
 
+import { AppDataSource } from './data-source'
 import { routers } from './routes'
 
-const app = express()
 
-app.use(express.json())
+AppDataSource.initialize().then(() => {
 
+  const app = express()
 
-app.use(routers)
+  app.use(express.json())
+  app.use(routers)
 
-const port = 5000
-
-app.listen(port, () => {
-  console.log(`Servidor inicidado em http://localhost:${port}`)
+  app.listen(process.env.PORT, () => {
+    console.log(`Servidor inicidado em http://localhost:${process.env.PORT}`)
+  })
 })

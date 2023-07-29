@@ -1,5 +1,6 @@
 import { Request, Response } from 'express'
 import { CriarTarefaUseCase } from './CriarTarefaUseCase'
+import { Tarefa } from '../../entities/Tarefa'
 
 class CriarTarefaController {
 
@@ -9,12 +10,15 @@ class CriarTarefaController {
     this.criarTarefaUseCase = criarTarefaUseCase
   }
 
-  remanejar(request: Request, response: Response) {
+  async remanejar(request: Request, response: Response) {
     const { nome, descricao, datacriacao } = request.body
-    const tarefa = this.criarTarefaUseCase.execute({ nome, descricao, datacriacao })
-    return response.status(201).json({tarefa})
+    const tarefa = await this.criarTarefaUseCase.execute({ nome, descricao, datacriacao })
+    if (tarefa instanceof Tarefa) {
+      return response.status(201).json({ tarefa })
+    }
+    return response.status(400).json({ message: tarefa })
   }
-
 }
+
 
 export { CriarTarefaController }

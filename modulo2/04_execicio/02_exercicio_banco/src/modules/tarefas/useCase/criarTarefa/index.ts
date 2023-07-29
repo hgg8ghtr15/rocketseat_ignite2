@@ -1,9 +1,11 @@
 import { TarefaRepositorio } from "../../repository/Imprmentacacao/TarefaRepositorio";
+import { TarefaRepositorioMysql } from "../../repository/Imprmentacacao/TarefaRepositotioMysql";
 import { CriarTarefaController } from "./CriarTarefaController";
 import { CriarTarefaUseCase } from "./CriarTarefaUseCase";
 
 
-const tarefaRepositorio = TarefaRepositorio.getInstance()
+// const tarefaRepositorio = TarefaRepositorio.getInstance()
+const tarefaRepositorio = TarefaRepositorioMysql.getInstance()
 
 const criarTarefaUseCase = new CriarTarefaUseCase(tarefaRepositorio)
 const criarTarefaController = new CriarTarefaController(criarTarefaUseCase)

@@ -9,23 +9,23 @@ import { deletarTarefaController } from '../modules/tarefas/useCase/deletarTaref
 const tarefaRouter = Router()
 
 tarefaRouter.post("/tarefa", (req, res) => {
-  criarTarefaController.remanejar(req, res)
+  return criarTarefaController.remanejar(req, res)
 })
 
 tarefaRouter.get("/tarefa", (req, res) => {
-  listarTarefaController.remanejar(req, res)
+  return listarTarefaController.remanejar(req, res)
 })
 
 tarefaRouter.put("/tarefa/:id", (req, res) => {
-  editarTarefaController.remanejar(req, res)
+  return editarTarefaController.remanejar(req, res)
 })
 
 tarefaRouter.get("/tarefa/:id", (req, res) => {
-  listartarefaPorIdController.remanejar(req, res)
+  return listartarefaPorIdController.remanejar(req, res)
 })
 
 tarefaRouter.delete("/tarefa/:id", (req, res) => {
-  deletarTarefaController.remanejar(req, res)
+  return deletarTarefaController.remanejar(req, res)
 })
 
 export { tarefaRouter }

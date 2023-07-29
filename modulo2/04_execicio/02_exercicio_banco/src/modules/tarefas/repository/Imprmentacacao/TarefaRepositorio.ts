@@ -1,4 +1,4 @@
-import { Tarefa } from "../../model/Tarefa";
+import { Tarefa } from "../../entities/Tarefa";
 import { ITarefaDTO, ITarefaEditDTO, ITarefaRepositorio } from "../ITarefa";
 
 
@@ -19,25 +19,28 @@ class TarefaRepositorio implements ITarefaRepositorio {
     return TarefaRepositorio.INSTANCE
   }
 
-  listarTarefas(): Tarefa[] {
+  async listarTarefas(): Promise<Tarefa[]> {
     try {
       // console.log(this.tarefas)
-      return this.tarefas
+      return await this.tarefas || []
     } catch (error) {
-      error(`Erro ao listar tarefas.`);
+      throw new Error(`Erro ao listar tarefas.`);
     }
   }
 
-  listartarefaPorId(id: string): Tarefa {
+  async listartarefaPorId(id: Number): Promise<Tarefa> {
     try {
-      const tarefa = this.tarefas.find(tarefa => tarefa.id === id);
+      const tarefa = await this.tarefas.find(tarefa => tarefa.id === id);
+      if (!tarefa) {
+        throw new Error(`Erro ao listar tarfa ${id}`);
+      }
       return tarefa
     } catch (error) {
-      Error(`Erro ao listar tarfa ${id}`);
+      throw new Error(`Erro ao listar tarfa ${id}`);
     }
   }
 
-  criarTarefa({ nome, descricao, dataCriacao }: ITarefaDTO): Tarefa {
+  async criarTarefa({ nome, descricao, dataCriacao }: ITarefaDTO): Promise<Tarefa> {
     try {
       const tarefa = new Tarefa
       Object.assign(tarefa, {
@@ -51,39 +54,37 @@ class TarefaRepositorio implements ITarefaRepositorio {
       return tarefa
 
     } catch (error) {
-      error(`Erro ao tentar criar tarefa.`);
+      throw new Error(`Erro ao tentar criar tarefa.`);
     }
   }
 
-  editarTarefa({ id, nome, descricao }: ITarefaEditDTO): Tarefa {
+  async editarTarefa({ id, nome, descricao }: ITarefaEditDTO): Promise<Tarefa> {
     try {
       const tarefa = this.tarefas.find(tarefa => tarefa.id === id)
       if (!tarefa) {
-        return null
+        throw new Error("Erro ao tentar Editar a tarefa.")
       }
       Object.assign(tarefa, {
         nome, descricao
       })
       return tarefa
     } catch (error) {
-      error("Erro ao tentar Editar a tarefa.");
+      throw new Error("Erro ao tentar Editar a tarefa.");
     }
   }
 
-  deletarTarefa(id: string): Tarefa {
+  async deletarTarefa(id: Number): Promise<string> {
     try {
       const tarefa = this.tarefas.find(tarefa => tarefa.id === id)
-
       if (!tarefa) {
         throw new Error(`Tarefa id ${id} não encontrada!`);
       }
       this.tarefas.splice(this.tarefas.indexOf(tarefa), 1)
-      return tarefa
+      return (`Tarefa deletada com sucesso!`)
     } catch (error) {
-      error(`Erro ao tentar excluir tarefa!`)
+      throw new Error(`Erro ao tentar excluir tarefa!`)
     }
   }
-
 
 }
 

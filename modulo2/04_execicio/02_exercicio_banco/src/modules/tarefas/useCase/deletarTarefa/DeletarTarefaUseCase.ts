@@ -1,16 +1,16 @@
-import { Tarefa } from "../../model/Tarefa"
-import { TarefaRepositorio } from "../../repository/Imprmentacacao/TarefaRepositorio"
+import { Tarefa } from "../../entities/Tarefa"
+import { TarefaRepositorioMysql } from "../../repository/Imprmentacacao/TarefaRepositotioMysql"
 
 
 class DeletarTarefaUseCase {
 
-  private tarefarepositorio: TarefaRepositorio
-  constructor(tarefarepositorio: TarefaRepositorio) {
-    this.tarefarepositorio = tarefarepositorio
+  private tarefaRepositorioMysql: TarefaRepositorioMysql
+  constructor(tarefaRepositorioMysql: TarefaRepositorioMysql) {
+    this.tarefaRepositorioMysql = tarefaRepositorioMysql
   }
 
-  execute(id: string): Tarefa {
-    const tarefa = this.tarefarepositorio.deletarTarefa(id)
+  async execute(id: Number): Promise<string> {
+    const tarefa = await this.tarefaRepositorioMysql.deletarTarefa(id)
     return tarefa
   }
 

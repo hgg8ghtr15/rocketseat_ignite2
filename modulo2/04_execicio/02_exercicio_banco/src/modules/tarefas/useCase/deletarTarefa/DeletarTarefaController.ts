@@ -1,6 +1,6 @@
 import { Request, Response } from 'express'
 
-import { DeletarTarefaUseCase } from "./deletarTarefaUseCase"
+import { DeletarTarefaUseCase } from "./DeletarTarefaUseCase"
 
 class DeletarTarefaController {
 
@@ -9,10 +9,10 @@ class DeletarTarefaController {
     this.deletarTarefaUseCase = deletarTarefaUseCase
   }
 
-  remanejar(request: Request, response: Response): Response {
+  async remanejar(request: Request, response: Response) {
     const { id } = request.params
-    const tarefa = this.deletarTarefaUseCase.execute(id)
-    return response.status(200).json({ tarefa })
+    const tarefa = await this.deletarTarefaUseCase.execute(Number(id))
+    return response.status(200).json({ message: tarefa })
   }
 
 }

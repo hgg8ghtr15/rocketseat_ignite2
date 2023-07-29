@@ -1,4 +1,4 @@
-import { Tarefa } from "../../model/Tarefa"
+import { Tarefa } from "../../entities/Tarefa"
 import { ITarefaRepositorio } from "../../repository/ITarefa"
 
 
@@ -10,9 +10,13 @@ class ListarTarefasUseCase {
     this.tarefaRepositorio = tarefaRepositorio
   }
 
-  execute(): Tarefa[] {
-    const tarefas = this.tarefaRepositorio.listarTarefas()
-    return tarefas
+  async execute() {
+    try {
+      const tarefas = await this.tarefaRepositorio.listarTarefas()
+      return tarefas
+    } catch (error) {
+      return error
+    }
   }
 
 }

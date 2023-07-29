@@ -1,4 +1,4 @@
-import { Tarefa } from "../../model/Tarefa";
+import { Tarefa } from "../../entities/Tarefa";
 import { ITarefaRepositorio } from "../../repository/ITarefa";
 
 interface IRequest {
@@ -8,8 +8,6 @@ interface IRequest {
   dataTermino?: Date;
 }
 
-
-
 class CriarTarefaUseCase {
 
   private tarefaRepositorio: ITarefaRepositorio
@@ -18,12 +16,15 @@ class CriarTarefaUseCase {
     this.tarefaRepositorio = tarefaRepositorio
   }
 
-  execute({ nome, descricao, datacriacao }: IRequest): Tarefa {
+  async execute({ nome, descricao, datacriacao }: IRequest) {
     const dataCriacao = new Date(datacriacao)
-    const tarefa = this.tarefaRepositorio.criarTarefa({ nome, descricao, dataCriacao })
-    return tarefa
+    try {
+      const tarefa = await this.tarefaRepositorio.criarTarefa({ nome, descricao, dataCriacao })
+      return tarefa
+    } catch (error) {
+      return error
+    }
   }
-
 }
 
 export { CriarTarefaUseCase }

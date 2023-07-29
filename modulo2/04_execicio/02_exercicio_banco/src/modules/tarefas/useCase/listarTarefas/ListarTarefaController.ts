@@ -1,5 +1,6 @@
 import { Request, Response } from "express"
 import { ListarTarefasUseCase } from "./ListarTarefasUseCase"
+import { Tarefa } from "../../entities/Tarefa"
 
 
 class ListarTarefaController {
@@ -9,10 +10,9 @@ class ListarTarefaController {
     this.listarTarefasUseCase = listarTarefasUseCase
   }
 
-  remanejar(request: Request, response: Response): Response {
-    const tarefas = this.listarTarefasUseCase.execute()
-    console.log(tarefas)
-    return response.status(200).json({ tarefas })
+  async remanejar(request: Request, response: Response) {
+    const tarefas = await this.listarTarefasUseCase.execute()
+    return response.status(200).json({ tarefas: tarefas })
   }
 
 }

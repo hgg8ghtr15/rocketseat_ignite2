@@ -1,10 +1,10 @@
 
-import { TarefaRepositorio } from "../../repository/Imprmentacacao/TarefaRepositorio";
+import { TarefaRepositorioMysql } from "../../repository/Imprmentacacao/TarefaRepositotioMysql";
 import { ListartarefaPorIdController } from "./ListartarefaPorIdController";
 import { ListartarefaPorIdUseCase } from "./ListartarefaPorIdUseCase";
 
-const tarefaRepositorio = TarefaRepositorio.getInstance()
-const listartarefaPorIdUseCase = new ListartarefaPorIdUseCase(tarefaRepositorio)
+const tarefaRepositorioMysql = TarefaRepositorioMysql.getInstance()
+const listartarefaPorIdUseCase = new ListartarefaPorIdUseCase(tarefaRepositorioMysql)
 const listartarefaPorIdController = new ListartarefaPorIdController(listartarefaPorIdUseCase)
 
 export { listartarefaPorIdController }

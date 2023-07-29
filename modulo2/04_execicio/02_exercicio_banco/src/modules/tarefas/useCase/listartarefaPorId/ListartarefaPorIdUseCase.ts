@@ -1,21 +1,25 @@
-import { Tarefa } from "../../model/Tarefa";
-import { TarefaRepositorio } from "../../repository/Imprmentacacao/TarefaRepositorio"
+import { Tarefa } from "../../entities/Tarefa";
+import { TarefaRepositorioMysql } from "../../repository/Imprmentacacao/TarefaRepositotioMysql"
 
 interface IRequest {
-  id: string;
+  id: Number;
 }
 
 class ListartarefaPorIdUseCase {
 
-  private tarefaRepositorio: TarefaRepositorio
+  private tarefaRepositorioMysql: TarefaRepositorioMysql
 
-  constructor(tarefaRepositorio: TarefaRepositorio) {
-    this.tarefaRepositorio = tarefaRepositorio
+  constructor(tarefaRepositorioMysql: TarefaRepositorioMysql) {
+    this.tarefaRepositorioMysql = tarefaRepositorioMysql
   }
 
-  execute({ id }: IRequest): Tarefa {
-    const tarefa = this.tarefaRepositorio.listartarefaPorId(id)
-    return tarefa
+  async execute({ id }: IRequest) {
+    try {
+      const tarefa = await this.tarefaRepositorioMysql.listartarefaPorId(id);
+      return tarefa
+    } catch (error) {
+      return error
+    }
   }
 
 

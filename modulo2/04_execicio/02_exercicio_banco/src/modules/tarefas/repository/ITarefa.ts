@@ -1,4 +1,4 @@
-import { Tarefa } from "../model/Tarefa";
+import { Tarefa } from "../entities/Tarefa";
 
 
 interface ITarefaDTO {
@@ -8,19 +8,18 @@ interface ITarefaDTO {
 }
 
 interface ITarefaEditDTO {
-  id: string;
+  id: Number;
   nome: string;
   descricao: string;
 }
 
 interface ITarefaRepositorio {
 
-  listarTarefas(): Tarefa[]
-  listartarefaPorId(id: string): Tarefa
-  criarTarefa({ nome, descricao, dataCriacao }: ITarefaDTO): Tarefa
-  editarTarefa({ id, nome, descricao }: ITarefaEditDTO): Tarefa
-  deletarTarefa(id: string): Tarefa
-
+  listarTarefas(): Promise<Tarefa[]>
+  listartarefaPorId(id: Number): Promise<Tarefa | string>
+  criarTarefa({ nome, descricao, dataCriacao }: ITarefaDTO): Promise<string | Tarefa>
+  editarTarefa({ id, nome, descricao }: ITarefaEditDTO): Promise<string | Tarefa>
+  deletarTarefa(id: Number): Promise<string>
 }
 
 export { ITarefaRepositorio, ITarefaDTO, ITarefaEditDTO }
